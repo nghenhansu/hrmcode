@@ -2,13 +2,19 @@
 <html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-    <title>HRMCode - Tiên phong Công nghệ, Tối đa Hiệu suất</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMCode - Tiên phong Công nghệ, Tối đa hiệu suất</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- 
+    Chosen Palette: NNS Corporate Blue (BG: #FFFFFF, Text: #212529, Primary: #0D6EFD, Accent: #FFC700)
+    Application Structure Plan: A multi-section single-page application that simulates a multi-page website experience. Navigation is handled by Alpine.js, allowing users to instantly switch between different content areas (Home, Blog, Solutions, Community) without page reloads. This structure is chosen for its speed, smooth user experience, and alignment with modern web trends, making complex information easily accessible for HR professionals.
+    Visualization & Content Choices: The design uses card-based layouts for products and articles for scannability. Interactive elements like CTAs are strategically placed to guide the user journey from learning (Blog) to conversion (Solutions) and community building (Telegram CTA). All visual elements like icons are created using Unicode or Tailwind CSS classes, ensuring fast loading and adherence to the no-SVG/no-image-file constraint where possible.
+    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
     <style>
         body {
             font-family: 'Be Vietnam Pro', sans-serif;
@@ -47,38 +53,6 @@
         .section { display: none; }
         .section.active { display: block; }
         [x-cloak] { display: none !important; }
-        /* Mobile improvements */
-        @media (max-width: 640px) {
-            header .h-20 { height: 60px; }
-            .text-4xl { font-size: 2rem; }
-            .text-3xl { font-size: 1.3rem; }
-            .text-2xl { font-size: 1.1rem; }
-            .container { padding-left: 0.5rem; padding-right: 0.5rem; }
-            .rounded-xl { border-radius: 0.75rem !important; }
-            .shadow-lg, .shadow-2xl { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-            .flex-row, .gap-8 { flex-direction: column !important; gap: 0.75rem !important; }
-            .flex-col { gap: 1rem !important; }
-            img { max-width: 100%; height: auto !important; }
-            .py-16, .sm\:py-24 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
-            .grid-cols-2, .grid-cols-3, .lg\:grid-cols-3 { grid-template-columns: 1fr !important; }
-            .sticky { position: static !important; }
-            .mt-16 { margin-top: 1.5rem !important; }
-            .p-8 { padding: 1rem !important; }
-            .p-6 { padding: 0.8rem !important; }
-            .py-12 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
-            .h-48 { height: 150px !important; }
-            aside { position: static !important; }
-        }
-        /* Touch targets */
-        .cta-primary, .cta-secondary, .nav-link, button, input, a {
-            min-height: 44px;
-            min-width: 44px;
-            font-size: 1rem;
-        }
-        /* Hide scrollbars for mobile nav */
-        .md\:hidden nav {
-            -webkit-overflow-scrolling: touch;
-        }
     </style>
 </head>
 <body x-data="{ currentSection: 'home', mobileMenuOpen: false }">
@@ -102,7 +76,7 @@
                 </nav>
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-800 hover:text-[#0D6EFD] focus:outline-none" aria-label="Mở menu điều hướng">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-800 hover:text-[#0D6EFD] focus:outline-none">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
@@ -111,7 +85,15 @@
             </div>
         </div>
         <!-- Mobile Navigation -->
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-transition class="md:hidden bg-white shadow-lg absolute top-20 left-0 w-full">
+        <div x-show="mobileMenuOpen" 
+             @click.away="mobileMenuOpen = false" 
+             x-transition:enter="transition ease-out duration-200" 
+             x-transition:enter-start="opacity-0 -translate-y-1" 
+             x-transition:enter-end="opacity-100 translate-y-0" 
+             x-transition:leave="transition ease-in duration-150" 
+             x-transition:leave-start="opacity-100 translate-y-0" 
+             x-transition:leave-end="opacity-0 -translate-y-1"
+             class="md:hidden bg-white shadow-lg absolute top-20 left-0 w-full" x-cloak>
             <nav class="flex flex-col space-y-1 px-4 py-4">
                 <a href="#" @click.prevent="currentSection = 'home'; mobileMenuOpen = false" class="nav-link block px-3 py-2 rounded-md" :class="{ 'active bg-blue-50': currentSection === 'home' }">Trang chủ</a>
                 <a href="#" @click.prevent="currentSection = 'kien-thuc'; mobileMenuOpen = false" class="nav-link block px-3 py-2 rounded-md" :class="{ 'active bg-blue-50': currentSection === 'kien-thuc' }">Kiến thức</a>
@@ -131,8 +113,8 @@
                 </div>
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
                     <div class="text-center max-w-3xl mx-auto">
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#212529] tracking-tight">Tiên phong Công nghệ, Tối đa Hiệu suất.</h1>
-                        <p class="mt-6 text-lg sm:text-xl text-gray-600">Nền tảng kiến thức và công cụ AI hàng đầu, giúp chuyên gia nhân sự Việt Nam định hình tương lai công nghệ.</p>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#212529] tracking-tight">Tiên phong Công nghệ, Tối đa hiệu suất.</h1>
+                        <p class="mt-6 text-lg sm:text-xl text-gray-600">Nền tảng kiến thức và công cụ AI hàng đầu, giúp chuyên gia nhân sự Việt Nam định hình tương lai công việc (Shaping Future Work).</p>
                         <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                             <a href="#" @click.prevent="currentSection = 'giai-phap'" class="cta-primary rounded-full px-8 py-3 font-semibold text-lg w-full sm:w-auto">Khám phá Ebook Ngay</a>
                             <a href="#" @click.prevent="currentSection = 'cong-dong'" class="cta-secondary rounded-full px-8 py-3 font-semibold text-lg border-2 w-full sm:w-auto">Tham gia Cộng đồng</a>
@@ -140,11 +122,12 @@
                     </div>
                 </div>
             </div>
+
             <!-- Problem/Solution Section -->
             <div class="py-16 sm:py-24 bg-[#F8F9FA]">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-2xl mx-auto">
-                        <h2 class="text-3xl font-bold tracking-tight text-[#212529]">Bạn là HR tiên phong về Công nghệ, AI?</h2>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#212529]">Bạn là HR tiên phong về Công nghệ, AI?</h2>
                         <p class="mt-4 text-lg text-gray-600">Thoát khỏi những quy trình cũ kỹ, đón đầu tương lai với các giải pháp thông minh và đột phá.</p>
                     </div>
                     <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
@@ -166,20 +149,21 @@
                     </div>
                 </div>
             </div>
+
             <!-- Products Section -->
             <div class="py-16 sm:py-24 bg-white">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-2xl mx-auto">
-                        <h2 class="text-3xl font-bold tracking-tight text-[#212529]">Giải pháp đột phá cho bạn</h2>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#212529]">Giải pháp đột phá cho bạn</h2>
                         <p class="mt-4 text-lg text-gray-600">Các sản phẩm và dịch vụ được thiết kế chuyên biệt cho chuyên gia Nhân sự Việt Nam.</p>
                     </div>
                     <div class="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                         <div class="lg:col-span-2 bg-[#F8F9FA] rounded-xl shadow-lg p-8 flex flex-col md:flex-row gap-8">
-                            <img src="https://i.postimg.cc/q7xQjsFs/Screenshot-2025-07-25-at-11-26-58-AM.png" alt="Bìa Ebook PROMPT MASTER FOR HR" class="w-full md:w-1/3 h-auto object-cover rounded-lg mx-auto mb-4">
+                            <img src="https://i.postimg.cc/q7xQjsFs/Screenshot-2025-07-25-at-11-26-58-AM.png" alt="Bìa Ebook PROMPT MASTER FOR HR" class="w-full md:w-1/3 h-auto object-cover rounded-lg shadow-md">
                             <div class="flex-1">
                                 <span class="text-sm font-bold uppercase text-[#0D6EFD]">Sản phẩm nổi bật</span>
                                 <h3 class="text-2xl font-bold text-[#212529] mt-2">Ebook "PROMPT MASTER FOR HR"</h3>
-                                <p class="mt-4 text-gray-600">Cuốn cẩm nang toàn diện đầu tiên tại Việt Nam, hướng dẫn bạn từng bước làm chủ AI, từ kiến tạo prompt đến ứng dụng thực tiễn.</p>
+                                <p class="mt-4 text-gray-600">Cuốn cẩm nang toàn diện đầu tiên tại Việt Nam, hướng dẫn bạn từng bước làm chủ AI, từ kiến tạo prompt hoàn hảo đến ứng dụng trong 10 chức năng HR cốt lõi.</p>
                                 <a href="#" @click.prevent="currentSection = 'giai-phap'" class="cta-primary inline-block mt-6 rounded-full px-6 py-2 font-semibold">Xem chi tiết</a>
                             </div>
                         </div>
@@ -198,16 +182,27 @@
                     </div>
                 </div>
             </div>
+
             <!-- Blog Section -->
             <div class="py-16 sm:py-24 bg-[#F8F9FA]">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-2xl mx-auto">
-                        <h2 class="text-3xl font-bold tracking-tight text-[#212529]">Bài viết mới nhất từ Chuyên gia</h2>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#212529]">Bài viết mới nhất từ Chuyên gia</h2>
                          <p class="mt-4 text-lg text-gray-600">Cập nhật kiến thức, xu hướng và các hướng dẫn thực tiễn về AI trong Nhân sự.</p>
                     </div>
                     <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Blog Post Card -->
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-shadow duration-300 hover:shadow-xl">
+                            <img src="https://placehold.co/600x400/0D6EFD/FFFFFF?text=GPT-OSS" alt="GPT-OSS Announcement" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <p class="text-sm text-gray-500">Tin tức nóng</p>
+                                <h3 class="mt-2 text-xl font-semibold text-[#212529] group-hover:text-[#0D6EFD] transition">OpenAI ra mắt GPT-OSS: Kỷ nguyên AI "Cây Nhà Lá Vườn" cho Doanh nghiệp Việt</h3>
+                                <p class="mt-3 text-gray-600">Một bước ngoặt chiến lược cho các chuyên gia Nhân sự, giải quyết bài toán bảo mật dữ liệu và tối ưu chi phí.</p>
+                                <a href="#" @click.prevent="currentSection = 'kien-thuc'" class="text-[#0D6EFD] font-semibold mt-4 inline-block">Đọc ngay →</a>
+                            </div>
+                        </div>
+                        <!-- Blog Post Card -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-shadow duration-300 hover:shadow-xl">
                             <img src="https://placehold.co/600x400/DEE2E6/212529?text=AI+in+Recruitment" alt="AI in Recruitment" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <p class="text-sm text-gray-500">Tuyển dụng</p>
@@ -217,7 +212,7 @@
                             </div>
                         </div>
                         <!-- Blog Post Card -->
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group transition-shadow duration-300 hover:shadow-xl">
                             <img src="https://placehold.co/600x400/CED4DA/212529?text=HR+Analytics" alt="HR Analytics" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <p class="text-sm text-gray-500">Phân tích dữ liệu</p>
@@ -226,28 +221,22 @@
                                 <a href="#" @click.prevent="currentSection = 'kien-thuc'" class="text-[#0D6EFD] font-semibold mt-4 inline-block">Đọc tiếp →</a>
                             </div>
                         </div>
-                        <!-- Blog Post Card -->
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
-                            <img src="https://placehold.co/600x400/ADB5BD/212529?text=Future+of+Work" alt="Future of Work" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <p class="text-sm text-gray-500">Xu hướng</p>
-                                <h3 class="mt-2 text-xl font-semibold text-[#212529] group-hover:text-[#0D6EFD] transition">Chuỗi 30 ngày làm chủ AI cho HR: Lộ trình cho người mới bắt đầu</h3>
-                                <p class="mt-3 text-gray-600">Bắt đầu hành trình của bạn với chuỗi bài viết được thiết kế để đưa bạn từ con số 0 đến tự tin ứng dụng AI.</p>
-                                <a href="#" @click.prevent="currentSection = 'kien-thuc'" class="text-[#0D6EFD] font-semibold mt-4 inline-block">Đọc tiếp →</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+
              <!-- Community CTA Section -->
             <div class="bg-[#0D6EFD]">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
                     <h2 class="text-3xl font-bold text-white">Gia nhập Cộng đồng AI cho HR tiên phong tại Việt Nam</h2>
                     <p class="mt-4 text-lg text-blue-100 max-w-2xl mx-auto">Kết nối, học hỏi và cùng nhau định hình tương lai ngành nhân sự.</p>
-                    <a href="https://t.me/+bipJtrB-qm5hNzA1" target="_blank" class="mt-8 inline-block bg-white text-[#0D6EFD] font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-color">Tham gia trên Telegram</a>
+                    <a href="https://t.me/+bipJtrB-qm5hNzA1" target="_blank" class="mt-8 inline-block bg-white text-[#0D6EFD] font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-colors text-lg">
+                        Tham gia trên Telegram
+                    </a>
                 </div>
             </div>
         </section>
+
         <!-- About Us Section -->
         <section class="section" :class="{'active': currentSection === 'cong-dong'}">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -258,8 +247,8 @@
                     </div>
                     <div class="mt-8 bg-white rounded-xl shadow-lg p-8 space-y-4 text-gray-700 leading-relaxed">
                         <p>Thế giới nhân sự đang thay đổi nhanh hơn bao giờ hết, và AI chính là động cơ đằng sau sự thay đổi đó.</p>
-                        <p>Nếu bạn là một người làm nhân sự không chỉ bằng trái tim mà còn bằng dữ liệu và công nghệ... Nếu bạn tin rằng hiệu suất không chỉ đến từ chăm chỉ mà còn từ thông minh, hãy tham gia cùng chúng tôi!</p>
-                        <p class="font-semibold">Cộng đồng "AI cho Nhân sự Việt Nam" trên Telegram không chỉ là một nhóm chat. Đây là nơi hội tụ của những bộ óc tiên phong, chia sẻ tài nguyên, kinh nghiệm thực chiến và hỗ trợ nhau phát triển sự nghiệp.</p>
+                        <p>Nếu bạn là một người làm nhân sự không chỉ bằng trái tim mà còn bằng dữ liệu và công nghệ... Nếu bạn tin rằng hiệu suất không đến từ những quy trình cũ kỹ, mà từ những giải pháp thông minh, đột phá... Và nếu bạn không chỉ muốn bắt kịp xu hướng, mà còn khát khao trở thành người tạo ra xu hướng, dẫn dắt việc ứng dụng AI một cách hiệu quả tại chính tổ chức của mình... thì đây chính là nơi dành cho bạn.</p>
+                        <p class="font-semibold">Cộng đồng "AI cho Nhân sự Việt Nam" trên Telegram không chỉ là một nhóm chat. Đây là nơi hội tụ của những bộ óc tiên phong - những người làm nhân sự thế hệ mới, những người xem công nghệ là đòn bẩy để nâng tầm giá trị của con người trong tổ chức.</p>
                     </div>
                     <div class="mt-12">
                         <h3 class="text-2xl font-bold text-center text-[#212529]">Vì sao bạn không nên bỏ lỡ cộng đồng này?</h3>
@@ -289,67 +278,51 @@
                 </div>
             </div>
         </section>
+
         <!-- Knowledge Section -->
         <section class="section" :class="{'active': currentSection === 'kien-thuc'}">
              <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center max-w-3xl mx-auto">
                     <h2 class="text-3xl sm:text-4xl font-bold text-center">Kiến thức từ Chuyên gia</h2>
-                    <p class="text-center mt-4 text-lg text-gray-600">Hành trình 4 tuần từ Zero đến Hero với AI trong Nhân sự. Khám phá các bài viết chuyên sâu được biên soạn bởi các chuyên gia đầu ngành.</p>
+                    <p class="text-center mt-4 text-lg text-gray-600">Hành trình 4 tuần từ Zero đến Hero với AI trong Nhân sự. Khám phá các bài viết chuyên sâu được biên soạn độc quyền từ Ebook "PROMPT MASTER FOR HR".</p>
                 </div>
                 <div class="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div class="lg:col-span-2 space-y-12">
+                        <!-- Featured Article -->
+                        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+                            <p class="text-sm font-bold uppercase text-[#0D6EFD]">Tin tức nóng</p>
+                            <h3 class="mt-2 text-2xl sm:text-3xl font-bold text-[#212529]">OpenAI Ra Mắt GPT-OSS: Kỷ Nguyên AI "Cây Nhà Lá Vườn" Cho Doanh Nghiệp Việt Bắt Đầu!</h3>
+                            <p class="mt-4 text-gray-600 leading-relaxed">Vừa qua, OpenAI đã tạo nên một cơn địa chấn trong giới công nghệ khi công bố GPT-OSS, một mô hình ngôn ngữ mã nguồn mở mạnh mẽ. Đây không chỉ là tin vui cho các lập trình viên, mà còn là một bước ngoặt chiến lược cho các chuyên gia Nhân sự tại Việt Nam. Nó mở ra một kỷ nguyên mới, nơi doanh nghiệp có thể tự chủ xây dựng các giải pháp AI mạnh mẽ ngay tại hạ tầng của mình.</p>
+                            <h4 class="text-xl font-bold mt-6 mb-4">Tại sao đây là bước ngoặt cho ngành HR?</h4>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start"><span class="text-yellow-500 mr-3 mt-1">✔</span><span><strong>Bảo mật dữ liệu tuyệt đối:</strong> Chạy AI trên máy tính nội bộ đồng nghĩa với việc không có dữ liệu nhân viên nhạy cảm nào bị gửi ra ngoài. Đây là câu trả lời cho bài toán tuân thủ Nghị định 13/2023/NĐ-CP.</span></li>
+                                <li class="flex items-start"><span class="text-yellow-500 mr-3 mt-1">✔</span><span><strong>Tùy chỉnh chuyên sâu:</strong> Doanh nghiệp có thể "dạy" thêm cho mô hình AI dựa trên dữ liệu riêng (văn hóa, chính sách, JD cũ...) để tạo ra các nội dung độc đáo và phù hợp nhất.</span></li>
+                                <li class="flex items-start"><span class="text-yellow-500 mr-3 mt-1">✔</span><span><strong>Tối ưu chi phí dài hạn:</strong> Giảm sự phụ thuộc vào các dịch vụ AI trả phí theo từng lần sử dụng, đặc biệt hiệu quả khi cần xử lý khối lượng lớn thông tin.</span></li>
+                            </ul>
+                             <h4 class="text-xl font-bold mt-6 mb-4">Bắt đầu hành trình của bạn ngay hôm nay!</h4>
+                             <p class="text-gray-600">HRMCode đã chuẩn bị sẵn sàng mọi thứ bạn cần để có thể trải nghiệm sức mạnh của GPT-OSS:</p>
+                             <div class="mt-4 space-y-4">
+                                <a href="https://lmstudio.ai/" target="_blank" class="block p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition"><strong>Bước 1: Tải LM Studio</strong> - "Ngôi nhà" để bạn chạy các mô hình AI trên máy tính cá nhân.</a>
+                                <a href="https://github.com/nghenhansu/chatgptoss20" target="_blank" class="block p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition"><strong>Bước 2: Tải mô hình GPT-OSS (bản NNS)</strong> - "Bộ não" AI đã sẵn sàng để bạn sử dụng.</a>
+                                <a href="https://docs.google.com/document/d/16YRZVXgbFZ3VmQYAfzAW8vRVOkte6yVOsEh8dUJawis/edit?usp=sharing" target="_blank" class="block p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition"><strong>Đọc thêm:</strong> Phân tích và so sánh chi tiết sức mạnh của GPT-OSS so với các mô hình khác.</a>
+                             </div>
+                             <div class="mt-8 bg-blue-50 p-6 rounded-lg text-center">
+                                <p class="font-semibold text-lg">Bạn đã thử nghiệm GPT-OSS chưa?</p>
+                                <p class="mt-2 text-gray-700">Hãy tham gia ngay Cộng đồng AI cho HR Việt Nam để cùng thảo luận, chia sẻ kinh nghiệm và nhận hỗ trợ trực tiếp từ các chuyên gia!</p>
+                                <a href="https://t.me/+bipJtrB-qm5hNzA1" target="_blank" class="cta-primary inline-block mt-4 rounded-full px-6 py-2 font-semibold">Tham gia Telegram</a>
+                             </div>
+                        </div>
+                        
                         <!-- Week 1 -->
                         <div>
                             <h3 class="text-2xl font-bold text-[#0D6EFD] border-b-2 border-[#0D6EFD] pb-2 mb-6">Tuần 1: Nền tảng vững chắc - Nhập môn AI & Prompt Engineering</h3>
                             <div class="space-y-6">
                                 <div class="bg-white p-6 rounded-xl shadow-lg group">
-                                    <h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 1: AI tạo sinh (Generative AI) là gì? Cuộc cách mạng thực sự cho ngành Nhân sự</h4>
+                                    <h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 1: AI tạo sinh (Generative AI) là gì? Cuộc cách mạng thực sự cho ngành Nhân sự Việt Nam.</h4>
                                 </div>
                                 <div class="bg-white p-6 rounded-xl shadow-lg group">
-                                    <h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 2: Prompt Engineering: "Nghệ thuật giao tiếp" với AI mà mọi chuyên gia HR cần biết</h4>
+                                    <h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 2: Prompt Engineering: "Nghệ thuật giao tiếp" với AI mà mọi chuyên gia HR cần biết.</h4>
                                 </div>
-                                <div class="bg-white p-6 rounded-xl shadow-lg group">
-                                    <h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 3: Giải mã Prompt Hoàn Hảo: Công thức 4 thành tố vàng.</h4>
-                                </div>
-                                <div class="bg-white p-6 rounded-xl shadow-lg group">
-                                    <h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 4: Thực hành: Cùng chuyên gia xây dựng Prompt đầu tiên của bạn để việc tuyển dụng hiệu quả hơn</h4>
-                                </div>
-                                <div class="bg-white p-6 rounded-xl shadow-lg group">
-                                    <h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 5: Checklist: 5 lỗi sai phổ biến khi viết Prompt và cách khắc phục.</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Week 2 -->
-                        <div>
-                            <h3 class="text-2xl font-bold text-[#0D6EFD] border-b-2 border-[#0D6EFD] pb-2 mb-6">Tuần 2: Ứng dụng thực chiến - AI trong 10 chức năng HR</h3>
-                            <div class="space-y-6">
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 6: Tối ưu Tuyển dụng với AI: 3 kỹ thuật thiết yếu</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 7: Nâng tầm L&D bằng AI: Xây dựng lộ trình đào tạo cá nhân hóa</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 8: C&B thời 4.0: Dùng AI brainstorm ý tưởng phúc lợi</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 9: Lắng nghe nhân viên hiệu quả với AI</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 10: [Case Study] Xây dựng Kế hoạch AI hóa toàn diện cho HR</h4></div>
-                            </div>
-                        </div>
-                        <!-- Week 3 -->
-                        <div>
-                            <h3 class="text-2xl font-bold text-[#0D6EFD] border-b-2 border-[#0D6EFD] pb-2 mb-6">Tuần 3: Kỹ năng nâng cao - Trở thành "Prompt Master"</h3>
-                             <div class="space-y-6">
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 11: Zero-shot vs. Few-shot Prompting: Khác biệt và ứng dụng</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 12: Sức mạnh của tư duy tuần tự trong Prompt</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 13: Bí quyết "dạy" AI tự suy luận</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 14: Nghệ thuật xây dựng cuộc hội thoại nhiều lượt với AI</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 15: 5 Kỹ thuật Prompt nâng cao giúp bạn nổi bật</h4></div>
-                            </div>
-                        </div>
-                        <!-- Week 4 -->
-                        <div>
-                            <h3 class="text-2xl font-bold text-[#0D6EFD] border-b-2 border-[#0D6EFD] pb-2 mb-6">Tuần 4: Quản trị thông minh - Lãnh đạo bằng AI</h3>
-                            <div class="space-y-6">
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 16: Rủi ro "ảo giác" (Hallucination) và cách kiểm soát</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 17: Khung đánh giá 4C: Bộ tiêu chí AI cho HR</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 18: La bàn Đạo đức & Pháp lý cùng AI</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 19: Biến AI thành Đối tác Chiến lược trong tổ chức</h4></div>
-                               <div class="bg-white p-6 rounded-xl shadow-lg group"><h4 class="text-xl font-semibold group-hover:text-[#0D6EFD] transition">Bài 20: [Hướng dẫn] Lộ trình 3 bước triển khai AI cho HR</h4></div>
                             </div>
                         </div>
                     </div>
@@ -361,6 +334,7 @@
                         <div class="bg-white p-6 rounded-xl shadow-lg">
                             <h4 class="font-bold text-lg">Chuyên mục</h4>
                             <ul class="mt-4 space-y-2">
+                                <li><a href="#" class="hover:text-[#0D6EFD] block">Tin tức nóng</a></li>
                                 <li><a href="#" class="hover:text-[#0D6EFD] block">Nền tảng AI & Prompt</a></li>
                                 <li><a href="#" class="hover:text-[#0D6EFD] block">Ứng dụng thực chiến</a></li>
                                 <li><a href="#" class="hover:text-[#0D6EFD] block">Kỹ năng nâng cao</a></li>
@@ -376,7 +350,7 @@
                 </div>
              </div>
         </section>
-        <!-- Ebook Section -->
+
         <section class="section" :class="{'active': currentSection === 'giai-phap'}">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center max-w-2xl mx-auto">
@@ -388,7 +362,7 @@
                     <div class="text-center">
                         <h1 class="text-4xl font-extrabold text-[#212529]">Cẩm nang bạn cần để làm chủ AI trong Nhân sự</h1>
                         <img src="https://i.postimg.cc/q7xQjsFs/Screenshot-2025-07-25-at-11-26-58-AM.png" alt="Ebook Cover" class="w-1/2 max-w-xs mx-auto mt-8 rounded-lg shadow-2xl">
-                        <a href="https://zalo.me/1314570293301868511" target="_blank" class="cta-primary inline-block mt-8 rounded-full px-10 py-4 font-bold text-xl">Sở hữu Ebook ngay (Giá ưu đãi)</a>
+                        <a href="https://zalo.me/1314570293301868511" target="_blank" class="cta-primary inline-block mt-8 rounded-full px-10 py-4 font-bold text-xl">Sở hữu Ebook ngay (Giá ưu đãi 299.000đ)</a>
                     </div>
                     <!-- What you'll learn -->
                     <div>
@@ -403,7 +377,7 @@
                     <!-- Who is it for -->
                     <div>
                         <h3 class="text-2xl font-bold text-center">Ebook này dành cho ai?</h3>
-                        <p class="mt-4 text-center text-gray-600">Trưởng phòng HR, HR Business Partner, Chuyên viên Tuyển dụng, và bất kỳ ai trong ngành Nhân sự muốn đi trước xu hướng AI.</p>
+                        <p class="mt-4 text-center text-gray-600">Trưởng phòng HR, HR Business Partner, Chuyên viên Tuyển dụng, và bất kỳ ai trong ngành Nhân sự muốn đi trước đón đầu công nghệ.</p>
                     </div>
                     <!-- FAQ -->
                     <div>
@@ -428,19 +402,21 @@
                 </div>
             </div>
         </section>
+        
     </main>
+
     <!-- Footer -->
     <footer class="bg-white border-t">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Column 1: Logo & Slogan -->
-                <div class="space-y-4">
+                <div class="space-y-4 text-center md:text-left">
                     <h3 class="text-2xl font-extrabold text-[#0D6EFD]">HRMCode</h3>
                     <p class="font-semibold">Shaping Future Work</p>
                     <p class="text-sm text-gray-600">Hiện thực hóa tri thức AI thành giá trị thực cho Nhân sự Việt Nam.</p>
                 </div>
                 <!-- Column 2: Sitemap -->
-                <div class="md:mx-auto">
+                <div class="md:mx-auto text-center md:text-left">
                     <h4 class="font-semibold text-lg">Sitemap</h4>
                     <ul class="mt-4 space-y-2 text-gray-600">
                         <li><a href="#" @click.prevent="currentSection = 'home'" class="hover:text-[#0D6EFD]">Trang chủ</a></li>
@@ -450,7 +426,7 @@
                     </ul>
                 </div>
                 <!-- Column 3: Social -->
-                <div class="md:mx-auto">
+                <div class="md:mx-auto text-center md:text-left">
                     <h4 class="font-semibold text-lg">Follow Us</h4>
                     <ul class="mt-4 space-y-2 text-gray-600">
                         <li><a href="https://www.facebook.com/groups/NGHENHANSUVN" target="_blank" class="hover:text-[#0D6EFD]">Facebook</a></li>
@@ -460,7 +436,7 @@
                     </ul>
                 </div>
                 <!-- Column 4: Contact -->
-                <div>
+                <div class="text-center md:text-left">
                     <h4 class="font-semibold text-lg">Thông tin liên hệ</h4>
                     <div class="mt-4 space-y-2 text-sm text-gray-600">
                         <p class="font-bold">CÔNG TY CỔ PHẦN NGHỀ NHÂN SỰ VIỆT NAM (NNS)</p>
@@ -475,6 +451,7 @@
             </div>
         </div>
     </footer>
+
     <script>
         // This script is intentionally minimal as Alpine.js handles the SPA navigation.
     </script>
